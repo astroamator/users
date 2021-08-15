@@ -5,17 +5,16 @@
  */
 package pl.test.users.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
- *
  * @author rober
  */
 @Entity
@@ -25,9 +24,6 @@ import lombok.Setter;
 public class RequestLog {
 
     @Id
-    @GeneratedValue
-    private long id;
-
     @Column(name = "login", nullable = false, unique = true)
     private String login;
 

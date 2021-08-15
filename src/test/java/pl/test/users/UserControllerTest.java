@@ -5,10 +5,6 @@
  */
 package pl.test.users;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +17,11 @@ import pl.test.users.clients.GitHubUserResponse;
 import pl.test.users.controllers.UserController;
 import pl.test.users.entities.RequestLog;
 import pl.test.users.repositories.RequestLogRepository;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  *
@@ -60,7 +61,7 @@ public class UserControllerTest {
     public void test_Persistence() {
         RequestLog loginRequestLog = new RequestLog(TEST_LOGIN);
         loginRequestLogRepository.save(loginRequestLog);
-        RequestLog loginRequestLogFound = loginRequestLogRepository.findByLogin(TEST_LOGIN).orElse(null);
+        RequestLog loginRequestLogFound = loginRequestLogRepository.findById(TEST_LOGIN).orElse(null);
 
         assertNotNull(loginRequestLogFound);
         assertEquals(TEST_LOGIN, loginRequestLogFound.getLogin());

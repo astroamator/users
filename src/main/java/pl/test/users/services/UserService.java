@@ -9,13 +9,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import pl.test.users.clients.GitHubUserClient;
 import pl.test.users.clients.GitHubUserResponse;
 import pl.test.users.entities.RequestLog;
-import pl.test.users.clients.GitHubUserClient;
 import pl.test.users.repositories.RequestLogRepository;
 
 /**
- *
  * @author rober
  */
 @Slf4j
@@ -30,9 +29,9 @@ public class UserService {
 
     public ResponseEntity<GitHubUserResponse> getUserData(String login) throws UserServiceException {
         try {
-            GitHubUserResponse respone = userClient.getUserDataByLogin(login);
+            GitHubUserResponse response = userClient.getUserDataByLogin(login);
             incrementLoginRequestCounter(login);
-            return ResponseEntity.ok(respone);
+            return ResponseEntity.ok(response);
         } catch (Exception ex) {
             log.error(ex.getMessage());
             throw new UserServiceException(ex.getMessage());
@@ -40,7 +39,7 @@ public class UserService {
     }
 
     private void incrementLoginRequestCounter(String login) {
-        RequestLog requestLog = loginRequestLogRepository.findByLogin(login)
+        RequestLog requestLog = loginRequestLogRepository.findById(login)
                 .orElse(RequestLog.builder()
                         .login(login)
                         .build()

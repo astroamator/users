@@ -5,18 +5,14 @@
  */
 package pl.test.users.repositories;
 
-import java.util.Optional;
-import pl.test.users.entities.RequestLog;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import pl.test.users.entities.RequestLog;
 
 /**
- *
  * @author rober
  */
 @Repository
-public interface RequestLogRepository extends CrudRepository<RequestLog, Integer> {
-
-    public Optional<RequestLog> findByLogin(String login);
+public interface RequestLogRepository extends CrudRepository<RequestLog, String> {
 
 }
